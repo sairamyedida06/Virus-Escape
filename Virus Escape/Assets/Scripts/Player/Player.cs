@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
 
     [SerializeField] int gravityScale;
-    float verticalVelocity;
+    [SerializeField] float verticalVelocity;
     public bool Grounded => characterController.isGrounded;
 
     [SerializeField] private float jumpHeight;
@@ -67,10 +67,10 @@ public class Player : MonoBehaviour
 
         UpdatePlayerRotation(moveInput3D);
 
-        
-        if (Grounded)
+
+        if (Grounded && verticalVelocity < 0f)
         {
-            verticalVelocity = -3f;
+            verticalVelocity = -2f;
         }
         else
         {
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         if(!wasGrounded && Grounded )
         {
             Landed.Invoke();
-            Debug.Log("landed");
+            
         }
         wasGrounded = Grounded;
  
@@ -134,6 +134,8 @@ public class Player : MonoBehaviour
     #region Animation
     void UpdateAnimation()
     {
+        Vector3 velocity = characterController.velocity;
+        float velocityY = velocity.y;
         bool jump = false;
         bool fall = false;
 
@@ -144,18 +146,19 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if(verticalVelocity >= 0)
+            if (velocityY > 0.1f)
             {
                 jump = true;
             }
-            else
+            else if (velocityY < -0.1f)
             {
                 fall = true;
             }
 
+
         }
 
-        Vector3 velocity = characterController.velocity;
+        
         velocity.y = 0;
         float speed = velocity.magnitude;
 
