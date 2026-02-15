@@ -26,6 +26,15 @@ public class Trap_Spikes : MonoBehaviour
 
     Estate state = Estate.Idle;
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Activate();
+            Debug.Log(other.gameObject);
+        }
+    }
     void ChangeState(Estate newstate)
     {
         state = newstate;
