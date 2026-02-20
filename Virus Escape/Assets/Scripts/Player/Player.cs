@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     public UnityEvent Jumped;
     public UnityEvent Landed;
 
+    public bool InputEnabled = true;
 
 
     [SerializeField]  CharacterController characterController;
@@ -44,18 +46,33 @@ public class Player : MonoBehaviour
     #region Input Handling
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (InputEnabled == false)
+        {
+            moveInput = Vector2.zero;
+            return;
+        }
+
         moveInput = context.ReadValue<Vector2>();
+
     }
 
     // jump
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (InputEnabled == false)
+        {
+            jumpInput = false;
+            return;
+        }
+
         if (context.performed)
         {
             jumpInput = true;
         }
+
     }
+
     #endregion
 
 
@@ -164,9 +181,18 @@ public class Player : MonoBehaviour
 
         animator.SetFloat("Speed", speed);
         animator.SetBool("Jump", jump);
-        animator.SetBool("Fall", fall);
-
+        animator.SetBool("Fall", fall);  
     }
+
+    public void OnDeath()
+    {
+        animator.SetBool("Alive", false);
+        InputEnabled = false;
+        Debug.Log("OnDeath");
+    }
+
+
+
     #endregion
 
 }

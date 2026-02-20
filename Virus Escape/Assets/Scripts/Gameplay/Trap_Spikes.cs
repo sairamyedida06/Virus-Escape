@@ -4,6 +4,7 @@ public class Trap_Spikes : MonoBehaviour
 {
     [SerializeField] GameObject spikeMesh;
     [SerializeField] float spikeActiveDuration;
+    [SerializeField] float activationDelay;
     [SerializeField] float spikeTransationDuration;
 
     [SerializeField] Vector3 spikesActivePosition = Vector3.zero;
@@ -43,7 +44,14 @@ public class Trap_Spikes : MonoBehaviour
 
     void UpdateFSM()
     {
-        if (state == Estate.TransationToActive)
+        if (state == Estate.wait)
+        {
+            spikeMesh.transform.localPosition = spikesIdlePosition;
+
+            if (timer >= activationDelay)
+                ChangeState(Estate.TransationToActive);
+        }
+        else if (state == Estate.TransationToActive)
         {
             Vector3 p = Vector3.Lerp(spikesIdlePosition, spikesActivePosition, timer / spikeTransationDuration);
             spikeMesh.transform.localPosition = p;

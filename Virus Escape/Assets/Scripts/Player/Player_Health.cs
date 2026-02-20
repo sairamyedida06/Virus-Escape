@@ -9,7 +9,7 @@ public class Player_Health : MonoBehaviour,IDamageable
 {
     [SerializeField] int maxHealthPoints;
 
-    public int healthPoints
+    public int HealthPoints
     {
         get
         {
@@ -20,41 +20,48 @@ public class Player_Health : MonoBehaviour,IDamageable
             bool wasAlive = maxHealthPoints > 0;
             maxHealthPoints = value;
 
-            if(healthPoints < 0 && wasAlive)
+            if(HealthPoints <= 0 && wasAlive)
             {
                 Died.Invoke();
+                Debug.Log("player died");
+                Uimanager.Instance.ShowGameOverMenu();
+                
             }
         }
     }
 
-    public bool alive => healthPoints > 0;
 
+    public UnityEvent Damaged;
+    public UnityEvent Died;
 
     private void Update()
     {
-        if (alive)
+        if (Alive)
         {
             if (transform.position.y < -1f)
             {
-                OnFall();
-
+                OnFall();  
+                
             }
         }
     }
 
     private void OnFall()
     {
-        Damage(healthPoints);
+        Damage(HealthPoints);
+        Debug.Log("FELL");
+        
+         
     }
 
-    UnityEvent Damaged;
-    UnityEvent Died;
+    
 
+    public bool Alive => HealthPoints > 0;
     public void Damage(int damage)
     {
-        healthPoints -= damage;
+        HealthPoints -= damage;
 
-        if (alive)
+        if (Alive)
         {
             Damaged.Invoke();
         }
