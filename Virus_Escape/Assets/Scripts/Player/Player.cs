@@ -14,30 +14,33 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float verticalVelocity = 0;
 
-    [SerializeField] private int gravityScale;
+    [SerializeField] private float gravityScale;
 
     [SerializeField] private bool jumpInput;
 
     [SerializeField] private float jumpHeight;
 
+    bool wasGrounded;
+
     public bool Grounded => characterController.isGrounded;
 
 
     public UnityEvent jumped;
-    
+    public UnityEvent Landed;
+
 
     private void Update()
     {
         UpdateMovement();
 
-        
+
     }
 
     #region
     //movement
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();  
+        moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -47,26 +50,29 @@ public class Player : MonoBehaviour
             jumpInput = true;
         }
     }
-   
+
 
     #endregion
 
 
     void UpdateMovement()
     {
-        Vector3 moveInput3D = new Vector3(moveInput.x, 0f , moveInput.y);
+        Vector3 moveInput3D = new Vector3(moveInput.x, 0f, moveInput.y);
 
         Vector3 motion = moveInput3D * moveSpeed * Time.deltaTime;
 
         Gravity();
 
-        UpdateJump();
+        UpdateJump();    
 
         motion.y = verticalVelocity * Time.deltaTime;
 
         characterController.Move(motion);
 
         UpdatePlayerRotation(moveInput3D);
+
+        OnLand();
+
     }
 
     public void UpdateJump()
@@ -82,7 +88,7 @@ public class Player : MonoBehaviour
     }
     public void Gravity()
     {
-        if (Grounded && verticalVelocity > 0)
+        if (Grounded && verticalVelocity < 0)
         {
             verticalVelocity = -3f;
 
@@ -91,6 +97,16 @@ public class Player : MonoBehaviour
         {
             verticalVelocity += Physics.gravity.y * gravityScale * Time.deltaTime;
         }
+    }
+
+    public void OnLand()
+    {
+        if(!wasGrounded && Grounded)
+        {
+            Landed.Invoke();
+            Debug.Log("Landed");
+        }
+        wasGrounded = Grounded;
     }
 
     //Rotation
