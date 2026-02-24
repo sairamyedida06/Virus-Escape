@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
@@ -15,10 +16,15 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int gravityScale;
 
+    [SerializeField] private bool jumpInput;
+
+    [SerializeField] private float jumpHeight;
+
     public bool Grounded => characterController.isGrounded;
 
 
-
+    public UnityEvent jumped;
+    
 
     private void Update()
     {
@@ -34,6 +40,13 @@ public class Player : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();  
     }
 
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            jumpInput = true;
+        }
+    }
    
 
     #endregion
@@ -46,7 +59,9 @@ public class Player : MonoBehaviour
         Vector3 motion = moveInput3D * moveSpeed * Time.deltaTime;
 
         Gravity();
-       
+
+        UpdateJump();
+
         motion.y = verticalVelocity * Time.deltaTime;
 
         characterController.Move(motion);
@@ -54,6 +69,17 @@ public class Player : MonoBehaviour
         UpdatePlayerRotation(moveInput3D);
     }
 
+    public void UpdateJump()
+    {
+        if (jumpInput && Grounded)
+        {
+            verticalVelocity = Mathf.Sqrt(2f * jumpHeight * Mathf.Abs(Physics.gravity.y * gravityScale));
+
+            jumpInput = false;
+
+            jumped.Invoke();
+        }
+    }
     public void Gravity()
     {
         if (Grounded)
