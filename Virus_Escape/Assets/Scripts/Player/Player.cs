@@ -11,6 +11,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float turnSpeed;
 
+    [SerializeField] private float verticalVelocity = 0;
+
+    [SerializeField] private int gravityScale;
+
+    public bool Grounded => characterController.isGrounded;
+
 
 
 
@@ -21,12 +27,17 @@ public class Player : MonoBehaviour
         
     }
 
-
+    #region
     //movement
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();  
     }
+
+   
+
+    #endregion
+
 
     void UpdateMovement()
     {
@@ -34,11 +45,26 @@ public class Player : MonoBehaviour
 
         Vector3 motion = moveInput3D * moveSpeed * Time.deltaTime;
 
+        Gravity();
+       
+        motion.y = verticalVelocity * Time.deltaTime;
+
         characterController.Move(motion);
 
         UpdatePlayerRotation(moveInput3D);
+    }
 
-        
+    public void Gravity()
+    {
+        if (Grounded)
+        {
+            verticalVelocity = -3f;
+
+        }
+        else
+        {
+            verticalVelocity += Physics.gravity.y * gravityScale * Time.deltaTime;
+        }
     }
 
     //Rotation
@@ -69,12 +95,5 @@ public class Player : MonoBehaviour
 
     }
 }
-
-    //Gravity
-
-    //jump 
-
-    //land detection
-
 
 
