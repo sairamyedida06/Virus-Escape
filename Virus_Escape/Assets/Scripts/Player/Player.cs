@@ -5,9 +5,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] CharacterController characterController;
 
-    Vector2 moveInput;
+    public Vector2 moveInput;
 
-    [SerializeField] float moveSpeed = 1f;
+    [SerializeField] private float moveSpeed = 1f;
+
+    [SerializeField] private float turnSpeed;
 
 
 
@@ -33,9 +35,40 @@ public class Player : MonoBehaviour
         Vector3 motion = moveInput3D * moveSpeed * Time.deltaTime;
 
         characterController.Move(motion);
+
+        UpdatePlayerRotation(moveInput3D);
+
+        
     }
 
     //Rotation
+    void UpdatePlayerRotation(Vector3 moveInput)
+    {
+        if (moveInput.sqrMagnitude <= 0.01f)
+        {
+            return;
+        }
+
+
+        Vector3 playerRotation = transform.rotation.eulerAngles;
+
+        playerRotation.y = GetAngleFromVector(moveInput);
+
+        Quaternion targetRotation = Quaternion.Euler(playerRotation);
+
+        float maxDegrees = turnSpeed * Time.deltaTime;
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxDegrees);
+
+    }
+    float GetAngleFromVector(Vector3 direction)
+    {
+        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+
+        return rotation.eulerAngles.y;
+
+    }
+}
 
     //Gravity
 
@@ -44,4 +77,4 @@ public class Player : MonoBehaviour
     //land detection
 
 
-}
+
