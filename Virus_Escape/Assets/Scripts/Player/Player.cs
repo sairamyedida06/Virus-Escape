@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
     }
     public void Gravity()
     {
-        if (Grounded)
+        if (Grounded && verticalVelocity > 0)
         {
             verticalVelocity = -3f;
 
