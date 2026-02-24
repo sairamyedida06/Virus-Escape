@@ -4,15 +4,15 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] CharacterController characterController;
+    [SerializeField] public CharacterController characterController;
 
     public Vector2 moveInput;
 
-    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] public float moveSpeed = 1f;
 
     [SerializeField] private float turnSpeed;
 
-    [SerializeField] private float verticalVelocity = 0;
+    [SerializeField] public float verticalVelocity = 0;
 
     [SerializeField] private float gravityScale;
 
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         Vector3 motion = moveInput3D * moveSpeed * Time.deltaTime;
 
         Gravity();
-
+ 
         UpdateJump();    
 
         motion.y = verticalVelocity * Time.deltaTime;
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         if(!wasGrounded && Grounded)
         {
             Landed.Invoke();
-            Debug.Log("Landed");
+            
         }
         wasGrounded = Grounded;
     }
@@ -136,6 +136,8 @@ public class Player : MonoBehaviour
         return rotation.eulerAngles.y;
 
     }
+
+
 }
 
 
