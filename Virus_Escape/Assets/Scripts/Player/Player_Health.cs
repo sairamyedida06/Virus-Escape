@@ -48,6 +48,6 @@ public class Player_Health : MonoBehaviour,IDamageable
     }
     public void Damage(int damage)
     {
-         HealthPoints =- damage;
+         HealthPoints -= damage;
     }
 }
