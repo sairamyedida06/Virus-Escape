@@ -1,7 +1,18 @@
 using UnityEngine;
 
+public enum TrapType
+{
+    pressure,
+    looping
+}
+
 public class Spike_Trap : MonoBehaviour
 {
+    public TrapType trap = TrapType.looping;
+
+
+    [SerializeField] bool activeOnStart = false;
+    [SerializeField] float activationDelay;
     [SerializeField] float activeDuration;
     [SerializeField] float transitionDuration;
 
@@ -12,18 +23,14 @@ public class Spike_Trap : MonoBehaviour
 
 
     float timer;
+    
 
-    public enum TrapType
-    {
-        pressure,
-        looping
-    }
-
-    TrapType trap = TrapType.pressure;
+    
 
     public enum TransitionState
     {
         Idle,
+        wait,
         TransistionToActive,
         Active,
         TransitionToIdle
@@ -33,7 +40,16 @@ public class Spike_Trap : MonoBehaviour
 
     private void Start()
     {
-        
+        if(trap == TrapType.pressure)
+    {
+            
+            ChangeState(activeOnStart ? TransitionState.wait : TransitionState.Idle);
+        }
+    else 
+        {
+            ChangeState(activeOnStart ? TransitionState.TransistionToActive : TransitionState.wait);
+        }
+
     }
     public void ChangeState(TransitionState newState)
     {
@@ -51,6 +67,16 @@ public class Spike_Trap : MonoBehaviour
     {
         switch (state)
         {
+            case TransitionState.wait:
+                spikeMesh.localPosition = spikeMeshIdlePosition;
+
+                if(timer >= activationDelay)
+                {
+                    ChangeState(TransitionState.TransistionToActive);
+                }
+
+                break;
+
             case TransitionState.TransistionToActive:
 
                 spikeMesh.localPosition = Vector3.Lerp(spikeMeshIdlePosition, spikeMeshActivePosition, timer / transitionDuration);
@@ -68,7 +94,7 @@ public class Spike_Trap : MonoBehaviour
 
                 if (timer >= transitionDuration)
                 {
-                    ChangeState(TransitionState.Idle);
+                    ChangeState(trap == TrapType.looping? TransitionState.TransistionToActive:TransitionState.Idle);
                     
                 }
 
@@ -89,18 +115,14 @@ public class Spike_Trap : MonoBehaviour
         timer += Time.deltaTime; 
     }
 
-    public void Activate()
-    {
-        if( state == TransitionState.Idle)
-        {
-            ChangeState(TransitionState.TransistionToActive);
-            
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        Activate();
+        if(state == TransitionState.Idle && trap == TrapType.pressure)
+        {
+            ChangeState(TransitionState.wait);
+        }
+       
         
     }
 }

@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b052deb750f174e9101b71abefb0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_Health
-  maxHealthPoints: 0
+  maxHealthPoints: 6
   Died:
     m_PersistentCalls:
       m_Calls: []
@@ -1630,6 +1630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4344c007a52390a4780a7a540059f41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  activationDelay: 0
   activeDuration: 1
   transitionDuration: 0.5
   spikeMesh: {fileID: 287678578}
