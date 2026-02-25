@@ -28,6 +28,8 @@ public class Player_Health : MonoBehaviour,IDamageable
             if (wasAlive && HealthPoints <= 0)
             {
                 Died.Invoke();
+
+                UI_Manager.Instance.ShowGameOverScreen();
             }
         }
     } 
