@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum TrapType
@@ -25,7 +27,7 @@ public class Spike_Trap : MonoBehaviour
     float timer;
     
 
-    
+    public List<IDamageable> damageables = new List<IDamageable>();
 
     public enum TransitionState
     {
@@ -56,6 +58,11 @@ public class Spike_Trap : MonoBehaviour
         state = newState;
 
         timer = 0f;
+
+        if (state == TransitionState.Active) 
+        {
+            ApplyDamage();
+        }
     }
 
     void Update()
@@ -118,11 +125,43 @@ public class Spike_Trap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(state == TransitionState.Idle && trap == TrapType.pressure)
+        IDamageable health = other.GetComponentInParent<IDamageable>();
+
+        if (health != null && !damageables.Contains(health))
+        {
+            damageables.Add(health);
+        }
+
+        if (health != null && state == TransitionState.Idle && trap == TrapType.pressure)
         {
             ChangeState(TransitionState.wait);
+        }   
+
+        if (health != null && state == TransitionState.Active)
+        {
+            health.Damage(1);
         }
-       
-        
+            
+    }
+    void OnTriggerExit(Collider other)
+    {
+        IDamageable health = other.GetComponentInParent<IDamageable>();
+
+        if (health != null && damageables.Contains(health))
+        {
+            damageables.Remove(health);
+        }
+            
+    }
+
+    public void ApplyDamage()
+    {
+       foreach(IDamageable health in damageables)
+        {
+            if(health != null)
+            {
+                health.Damage(1);
+            }
+        }
     }
 }
