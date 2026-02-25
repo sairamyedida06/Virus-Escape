@@ -284,6 +284,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &190769005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190768996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b052deb750f174e9101b71abefb0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player_Health
+  maxHealthPoints: 0
+  Died:
+    m_PersistentCalls:
+      m_Calls: []
+  Damaged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &232894577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1864,6 +1883,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 79570716662443845, guid: 148d39a8e0ac5e54581a35bc501123ab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 190769001}
+    - targetCorrespondingSourceObject: {fileID: 79570716662443845, guid: 148d39a8e0ac5e54581a35bc501123ab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 190769005}
   m_SourcePrefab: {fileID: 100100000, guid: 148d39a8e0ac5e54581a35bc501123ab, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
