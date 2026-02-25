@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class UI_Manager : MonoBehaviour
 {
-    [SerializeField] GameObject GameOverScreen;
+     public GameObject GameOverScreen;
 
+    public Health_Display Health_Display;
     public static UI_Manager Instance { get; private set; }
 
 
@@ -29,7 +30,7 @@ public class UI_Manager : MonoBehaviour
         GameOverScreen.SetActive(true);
 
         ClearCameraTarget();
-    }
+        }
 
     public void ClearCameraTarget()
     {
