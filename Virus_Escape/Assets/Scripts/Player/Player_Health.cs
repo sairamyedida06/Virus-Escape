@@ -22,6 +22,7 @@ public class Player_Health : MonoBehaviour,IDamageable
         set
         {
             bool wasAlive = HealthPoints > 0;
+            maxHealthPoints = Mathf.Max(value, 0);
             maxHealthPoints = value;
 
             if (wasAlive && HealthPoints <= 0)
@@ -42,12 +43,20 @@ public class Player_Health : MonoBehaviour,IDamageable
             if (transform.position.y <= -2f)
             {
                 Damage(HealthPoints);
+
+                
             }
         }
         
     }
     public void Damage(int damage)
     {
-         HealthPoints -= damage;
+        if (!Alive) { return; }
+        HealthPoints -= damage;
+
+        Damaged.Invoke();
+
+
+
     }
 }
