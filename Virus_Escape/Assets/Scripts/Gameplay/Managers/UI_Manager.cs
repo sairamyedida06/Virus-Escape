@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,7 @@ public class UI_Manager : MonoBehaviour
     void Start()
     {
         GameOverScreen.SetActive(false);
+
     }
 
     public void Restart()
@@ -25,7 +27,17 @@ public class UI_Manager : MonoBehaviour
     public void ShowGameOverScreen()
     {
         GameOverScreen.SetActive(true);
+
+        ClearCameraTarget();
     }
 
-   
+    public void ClearCameraTarget()
+    {
+        var cam = (CinemachineCamera)CinemachineBrain.GetActiveBrain(0).ActiveVirtualCamera;
+
+        cam.Target.TrackingTarget = null;
+
+    }
+
+
 }
