@@ -6,6 +6,8 @@ public class ProgressUI : MonoBehaviour
     public int RemainingCoins => Coins.Count;
 
     [SerializeField] List<GameObject> Coins;
+
+    [SerializeField] LevelExit LevelExit;
     
 
     void Start()
@@ -16,6 +18,8 @@ public class ProgressUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        int previousRemaingCoins = RemainingCoins;
+
         for (int i = Coins.Count - 1; i >= 0; i--) 
         {
             var coins = Coins[i];
@@ -27,6 +31,11 @@ public class ProgressUI : MonoBehaviour
         }
 
         UI_Manager.Instance.progress_display.SetCoins(RemainingCoins);
+
+        if (previousRemaingCoins != RemainingCoins && RemainingCoins == 0) 
+        {
+            LevelExit.OpenGate();
+        }
     }
 
 
