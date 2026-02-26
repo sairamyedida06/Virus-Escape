@@ -7,6 +7,10 @@ public class UI_Manager : MonoBehaviour
      public GameObject GameOverScreen;
 
     public Health_Display Health_Display;
+
+    [SerializeField] public ProgressUI progressTracker;
+    [SerializeField] public Progress_Display progress_display;
+
     public static UI_Manager Instance { get; private set; }
 
 
