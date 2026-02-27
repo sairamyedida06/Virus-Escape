@@ -9,6 +9,7 @@ public class Collectable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Destroy(gameObject);
+            VFX_Manager.Instance.PlayCoinVFX(transform.position);
         }
 
     }

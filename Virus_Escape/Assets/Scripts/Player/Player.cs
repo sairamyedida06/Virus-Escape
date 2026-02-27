@@ -104,6 +104,8 @@ public class Player : MonoBehaviour
         if(!wasGrounded && Grounded)
         {
             Landed.Invoke();
+
+            VFX_Manager.Instance.PlayLandVFX(transform.position);
             
         }
         wasGrounded = Grounded;

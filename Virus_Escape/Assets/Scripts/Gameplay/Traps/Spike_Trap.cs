@@ -65,7 +65,13 @@ public class Spike_Trap : MonoBehaviour
         if (state == TransitionState.Active) 
         {
             ApplyDamage();
+            
+        }
+
+        if(state == TransitionState.TransistionToActive)
+        {
             localSource.PlayOneShot(spikeClip);
+            VFX_Manager.Instance.PlayLandVFX(transform.position);
         }
     }
 
