@@ -23,6 +23,9 @@ public class Spike_Trap : MonoBehaviour
     [SerializeField] Vector3 spikeMeshIdlePosition = new Vector3(0f, -0.508f, 0f);
     [SerializeField] Vector3 spikeMeshActivePosition = new Vector3(0, .12f, 0);
 
+    [SerializeField] AudioSource localSource;
+    [SerializeField] private AudioClip spikeClip;
+
 
     float timer;
     
@@ -62,6 +65,7 @@ public class Spike_Trap : MonoBehaviour
         if (state == TransitionState.Active) 
         {
             ApplyDamage();
+            localSource.PlayOneShot(spikeClip);
         }
     }
 

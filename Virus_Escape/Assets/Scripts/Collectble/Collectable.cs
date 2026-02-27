@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Collectable : MonoBehaviour
 {
+    public UnityEvent CollectableEvent;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
