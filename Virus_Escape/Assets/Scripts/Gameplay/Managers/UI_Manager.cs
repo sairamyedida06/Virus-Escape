@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class UI_Manager : MonoBehaviour
 {
+    public GameObject mainMenuScreen;
+    public GameObject hud;
      public GameObject GameOverScreen;
 
     public Health_Display Health_Display;
@@ -17,16 +19,41 @@ public class UI_Manager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        GameOverScreen.SetActive(false);
+        mainMenuScreen.SetActive(false);
+        hud.SetActive(false);
     }
     void Start()
     {
-        GameOverScreen.SetActive(false);
+        
 
     }
 
+    public void StartGame()
+    {
+        mainMenuScreen.SetActive(false);
+
+        SceneManager.LoadScene("Test Scene");
+    }
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ShowMainMenu()
+    {
+        mainMenuScreen.SetActive(true);
+
+        hud.SetActive(false);
+        GameOverScreen.SetActive(false );
+
+    }
+
+    public void ShowHud()
+    {
+        hud.SetActive(true);
+        mainMenuScreen.SetActive(false);
+        GameOverScreen.SetActive(false);
     }
 
     public void ShowGameOverScreen()
