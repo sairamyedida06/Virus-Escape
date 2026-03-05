@@ -2,6 +2,18 @@
 
 public class SceneInitializer : MonoBehaviour
 {
+    [SerializeField] UI_Manager uiManager;
+
+    private void Awake()
+    {
+        if(UI_Manager.Instance == null)
+        {
+            Instantiate(uiManager);
+
+            DontDestroyOnLoad(UI_Manager.Instance);
+
+        }
+    }
     public enum Scenetype
     {
         Gameplay,

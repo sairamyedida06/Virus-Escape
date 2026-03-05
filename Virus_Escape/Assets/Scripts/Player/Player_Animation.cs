@@ -30,7 +30,7 @@ public class Player_Animation : MonoBehaviour
         Vector3 velocity = player.characterController.velocity;
         velocity.y = 0f;
 
-        float speed = velocity.magnitude / player.moveSpeed;
+        float speed = velocity.magnitude;
 
         animator.SetFloat("Speed", speed);
         animator.SetBool("Jump", jump);

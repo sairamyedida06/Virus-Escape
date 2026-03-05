@@ -8,7 +8,12 @@ public class Player : MonoBehaviour
 
     public Vector2 moveInput;
 
-    [SerializeField] public float moveSpeed = 1f;
+    [SerializeField] float speed;
+
+    private bool sprintInput;
+
+    [SerializeField] float sprintSpeed;
+  
 
     [SerializeField] private float turnSpeed;
 
@@ -24,6 +29,9 @@ public class Player : MonoBehaviour
 
     public bool Grounded => characterController.isGrounded;
 
+    private float MoveSpeed => sprintInput ? sprintSpeed : speed;
+
+
 
     public UnityEvent jumped;
     public UnityEvent Landed;
@@ -32,7 +40,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         UpdateMovement();
-
 
     }
 
@@ -51,6 +58,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            sprintInput = true;
+
+        }
+        else if(context.canceled)
+        {
+            sprintInput= false;
+        }
+    }
+
 
     #endregion
 
@@ -59,7 +79,7 @@ public class Player : MonoBehaviour
     {
         Vector3 moveInput3D = new Vector3(moveInput.x, 0f, moveInput.y);
 
-        Vector3 motion = moveInput3D * moveSpeed * Time.deltaTime;
+        Vector3 motion = moveInput3D * MoveSpeed * Time.deltaTime;
 
         Gravity();
  
@@ -98,6 +118,7 @@ public class Player : MonoBehaviour
             verticalVelocity += Physics.gravity.y * gravityScale * Time.deltaTime;
         }
     }
+
 
     public void OnLand()
     {
