@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] public ProgressUI progressTracker;
     [SerializeField] public Progress_Display progress_display;
+
+    [SerializeField] Slider staminaBar;
+    [SerializeField] Staminabar Staminabar;
 
     public static UI_Manager Instance { get; private set; }
 
@@ -61,7 +65,12 @@ public class UI_Manager : MonoBehaviour
         GameOverScreen.SetActive(true);
 
         ClearCameraTarget();
-        }
+    }
+
+    public void SetStaminaFillAmount(float value)
+    {
+       Staminabar.SetValue(value);
+    }
 
     public void ClearCameraTarget()
     {

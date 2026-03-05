@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] public CharacterController characterController;
+    [SerializeField] PlayerStamina playerStamina;
 
     public Vector2 moveInput;
 
@@ -25,12 +26,17 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float jumpHeight;
 
+    
+
     bool wasGrounded;
 
     public bool Grounded => characterController.isGrounded;
 
     private float MoveSpeed => sprintInput ? sprintSpeed : speed;
 
+    [Space(10)]
+    [SerializeField] private float SprintStaminaCost;
+ 
 
 
     public UnityEvent jumped;
@@ -39,8 +45,27 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        SprintStamina();
         UpdateMovement();
+        
+    }
 
+    public void SprintStamina()
+    {
+        if(sprintInput == true)
+        {
+            float staminaConsumed = SprintStaminaCost * Time.deltaTime;
+
+            if (playerStamina.HasEnoughStamina(staminaConsumed))
+            {
+                playerStamina.ConsumeStamina(staminaConsumed);
+            }
+            else
+            {
+                sprintInput = false;
+            }
+        }
+        
     }
 
     #region

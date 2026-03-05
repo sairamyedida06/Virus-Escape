@@ -81,6 +81,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8207876931177870394}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9081561301857563864}
   m_SourcePrefab: {fileID: 100100000, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
 --- !u!1 &79570716662443845 stripped
 GameObject:
@@ -277,6 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   characterController: {fileID: 9210081557984348056}
+  playerStamina: {fileID: 9081561301857563864}
   moveInput: {x: 0, y: 0}
   speed: 3
   sprintSpeed: 5
@@ -285,6 +289,9 @@ MonoBehaviour:
   gravityScale: 2
   jumpInput: 0
   jumpHeight: 0.7
+  staminaRegeneration: 0
+  regenDelay: 0
+  SprintStaminaCost: 10
   jumped:
     m_PersistentCalls:
       m_Calls:
@@ -378,3 +385,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79570716662443845}
   m_Enabled: 1
+--- !u!114 &9081561301857563864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79570716662443845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6d676191c06cd4393c0fb7ef5d4c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStamina
+  points: 30
+  maxPoints: 30
+  staminaRegeneration: 10
+  regenDelay: 2
