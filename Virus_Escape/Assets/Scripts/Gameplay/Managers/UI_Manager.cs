@@ -38,7 +38,7 @@ public class UI_Manager : MonoBehaviour
         mainMenuScreen.SetActive(false);
   
 
-        SceneManager.LoadScene("Test Scene");
+        SceneManager.LoadScene("Level_1");
     }
     public void Restart()
     {
