@@ -79,6 +79,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelExit
       objectReference: {fileID: 0}
+    - target: {fileID: 3497755000995248242, guid: 8526bae063319e0489b9baf5faf92c38, type: 3}
+      propertyPath: gateMesh
+      value: 
+      objectReference: {fileID: 7325416870110338935}
+    - target: {fileID: 3497755000995248242, guid: 8526bae063319e0489b9baf5faf92c38, type: 3}
+      propertyPath: targetScene
+      value: Level_2
+      objectReference: {fileID: 0}
     - target: {fileID: 4211469321710205589, guid: 8526bae063319e0489b9baf5faf92c38, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -131,6 +139,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5795769406515958892, guid: 8526bae063319e0489b9baf5faf92c38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -150,5 +162,10 @@ MonoBehaviour:
 --- !u!4 &3260166507824483056 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4211469321710205589, guid: 8526bae063319e0489b9baf5faf92c38, type: 3}
+  m_PrefabInstance: {fileID: 1678810367926268005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7325416870110338935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8279110310336950034, guid: 8526bae063319e0489b9baf5faf92c38, type: 3}
   m_PrefabInstance: {fileID: 1678810367926268005}
   m_PrefabAsset: {fileID: 0}

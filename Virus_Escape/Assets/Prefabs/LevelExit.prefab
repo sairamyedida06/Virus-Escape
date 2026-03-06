@@ -4998,6 +4998,7 @@ MonoBehaviour:
   gateCollider: {fileID: 1421494180986468790}
   gateMesh: {fileID: 5795769406515958892}
   targetScene: Main Menu
+  open: 0
 --- !u!1 &4118156245000002977
 GameObject:
   m_ObjectHideFlags: 0
@@ -10187,8 +10188,8 @@ Transform:
   m_GameObject: {fileID: 8279110310336950034}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.09385415, z: -0, w: 0.995586}
-  m_LocalPosition: {x: -0.27, y: 2.01, z: 0.2}
-  m_LocalScale: {x: 2.451963, y: 2.453837, z: 1.3005}
+  m_LocalPosition: {x: 0.07, y: 2.41, z: 0.2}
+  m_LocalScale: {x: 2.8636475, y: 2.8658361, z: 1.5188539}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2535861551066342430}
@@ -19979,6 +19980,30 @@ PrefabInstance:
       propertyPath: gateMesh
       value: 
       objectReference: {fileID: 5795769406515958892}
+    - target: {fileID: 3814686541084696734, guid: 1a175fef4c6801e48a5197f4de3f560c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.8636475
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814686541084696734, guid: 1a175fef4c6801e48a5197f4de3f560c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.8658361
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814686541084696734, guid: 1a175fef4c6801e48a5197f4de3f560c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5188539
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814686541084696734, guid: 1a175fef4c6801e48a5197f4de3f560c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814686541084696734, guid: 1a175fef4c6801e48a5197f4de3f560c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814686541084696734, guid: 1a175fef4c6801e48a5197f4de3f560c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5236817332105005823, guid: 1a175fef4c6801e48a5197f4de3f560c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

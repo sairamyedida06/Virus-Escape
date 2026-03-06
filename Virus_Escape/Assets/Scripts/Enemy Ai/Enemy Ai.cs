@@ -34,6 +34,8 @@ public class EnemyAI : MonoBehaviour
     private bool isIdle;
     private bool isAttacking;
 
+    private Player_Health playerHealth;
+
     private enum State { Patrol, Chase, Attack }
     private State currentState;
 
@@ -45,12 +47,23 @@ public class EnemyAI : MonoBehaviour
 
         spawnPosition = transform.position;
 
+        // NEW: get player health reference
+        playerHealth = player.GetComponent<Player_Health>();
+
         SetNewPatrolPoint();
         currentState = State.Patrol;
     }
 
     void Update()
     {
+        // NEW: stop enemy if player is dead
+        if (playerHealth != null && !playerHealth.Alive)
+        {
+            CancelAttack();
+            currentState = State.Patrol;
+            return;
+        }
+
         cooldownTimer -= Time.deltaTime;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -155,28 +168,25 @@ public class EnemyAI : MonoBehaviour
         agent.ResetPath();
 
         Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookPos - transform.position), Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            Quaternion.LookRotation(lookPos - transform.position),
+            Time.deltaTime * rotationSpeed
+        );
 
         animator.ResetTrigger("Attack");
         animator.SetTrigger("Attack");
-
-        // Logic: You can call DealDamage() here if you want it to happen 
-        // instantly, or call it from an Animation Event.
-        
-
-        Debug.Log(Vector3.Distance(transform.position, player.position));
     }
 
     public void DealDamage()
     {
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
-            // Try to find the interface on the player object
             IDamageable damageable = player.GetComponent<IDamageable>();
 
             if (damageable != null)
             {
-                damageable.Damage(1);
+                damageable.Damage(attackDamage);
             }
         }
     }
@@ -209,7 +219,11 @@ public class EnemyAI : MonoBehaviour
         if (agent.velocity.sqrMagnitude > 0.1f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(agent.velocity.normalized);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                Time.deltaTime * rotationSpeed
+            );
         }
     }
 
@@ -217,7 +231,8 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(spawnPosition, maxChaseDistance);
-        Gizmos.DrawLine(transform.position, player.position);
-        
+
+        if (player != null)
+            Gizmos.DrawLine(transform.position, player.position);
     }
 }

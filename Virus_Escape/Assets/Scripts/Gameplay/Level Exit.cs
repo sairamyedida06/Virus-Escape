@@ -5,7 +5,7 @@ public class LevelExit : MonoBehaviour
 {
     [SerializeField] Collider gateCollider;
 
-    [SerializeField] Transform gateMesh;
+    [SerializeField] GameObject gateMesh;
 
     [SerializeField] string targetScene;
 
@@ -14,7 +14,8 @@ public class LevelExit : MonoBehaviour
     private void Start()
     {
         gateCollider.enabled = false;
-        Debug.Log("gateClosed");
+        gateMesh.SetActive(false);
+
     }
     public void OpenGate()
     {
@@ -22,7 +23,9 @@ public class LevelExit : MonoBehaviour
 
         gateCollider.enabled = true;
 
-        Debug.Log("opend");
+        gateMesh.SetActive(true);
+
+        
 
     }
 
@@ -30,16 +33,17 @@ public class LevelExit : MonoBehaviour
     {
         SceneManager.LoadScene(targetScene);
     }
-    private void Update()
-    {
-        if (open)
-        {
-            Vector3 targetPosition = new Vector3(0f, -2.1f, 0f);
+
+    //private void Update()
+    //{
+    //    if (open)
+    //    {
+    //        Vector3 targetPosition = new Vector3(0f, 2.1f, 0f);
 
            
-            gateMesh.localPosition = Vector3.Lerp(gateMesh.localPosition, targetPosition, 1f * Time.deltaTime);
-        }
-    }
+    //        gateMesh.localPosition = Vector3.Lerp(gateMesh.localPosition, targetPosition, 1f * Time.deltaTime);
+    //    }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {

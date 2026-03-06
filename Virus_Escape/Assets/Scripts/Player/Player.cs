@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float jumpHeight;
 
-    
+    public bool InputHandling = true;
 
     bool wasGrounded;
 
@@ -52,19 +52,21 @@ public class Player : MonoBehaviour
 
     public void SprintStamina()
     {
-        if(sprintInput == true)
-        {
-            float staminaConsumed = SprintStaminaCost * Time.deltaTime;
+        
+        
+            if (sprintInput == true)
+            {
+                float staminaConsumed = SprintStaminaCost * Time.deltaTime;
 
-            if (playerStamina.HasEnoughStamina(staminaConsumed))
-            {
-                playerStamina.ConsumeStamina(staminaConsumed);
+                if (playerStamina.HasEnoughStamina(staminaConsumed))
+                {
+                    playerStamina.ConsumeStamina(staminaConsumed);
+                }
+                else
+                {
+                    sprintInput = false;
+                }
             }
-            else
-            {
-                sprintInput = false;
-            }
-        }
         
     }
 
@@ -72,11 +74,22 @@ public class Player : MonoBehaviour
     //movement
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (InputHandling == false)
+        {
+            moveInput = Vector2.zero;
+            return;
+        }
         moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (InputHandling == false)
+        {
+            jumpInput = false;
+            return;
+        }
+
         if (context.performed)
         {
             jumpInput = true;
@@ -102,6 +115,7 @@ public class Player : MonoBehaviour
 
     void UpdateMovement()
     {
+
         Vector3 moveInput3D = new Vector3(moveInput.x, 0f, moveInput.y);
 
         Vector3 motion = moveInput3D * MoveSpeed * Time.deltaTime;

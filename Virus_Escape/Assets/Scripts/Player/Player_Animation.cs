@@ -36,4 +36,10 @@ public class Player_Animation : MonoBehaviour
         animator.SetBool("Jump", jump);
         animator.SetBool("Fall", fall);
     }
+
+    public void OnDeath()
+    {
+        player.InputHandling = false;
+        animator.SetBool("Alive",false);
+    }
 }
