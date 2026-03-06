@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e3c7df78237484bab518c3baa60461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneInitializer
-  uiManager: {fileID: 1765835049889872726, guid: f8b9d1bdc92fc174b8b51c6f2c829842, type: 3}
-  scenetype: 1
+  uiManager: {fileID: 879813468540292421, guid: ae5c7e893effec543b3aa99b6980b74a, type: 3}
+  scenetype: 0

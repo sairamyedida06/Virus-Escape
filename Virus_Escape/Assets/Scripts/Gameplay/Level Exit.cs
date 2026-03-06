@@ -3,19 +3,26 @@ using UnityEngine.SceneManagement;
 
 public class LevelExit : MonoBehaviour
 {
-    
+    [SerializeField] Collider gateCollider;
 
     [SerializeField] Transform gateMesh;
 
     [SerializeField] string targetScene;
 
-    bool open = false;
+    [SerializeField] bool open = false;
 
+    private void Start()
+    {
+        gateCollider.enabled = false;
+        Debug.Log("gateClosed");
+    }
     public void OpenGate()
     {
         open = true;
 
-       
+        gateCollider.enabled = true;
+
+        Debug.Log("opend");
 
     }
 

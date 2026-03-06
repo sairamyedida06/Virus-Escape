@@ -36,6 +36,7 @@ public class UI_Manager : MonoBehaviour
     public void StartGame()
     {
         mainMenuScreen.SetActive(false);
+  
 
         SceneManager.LoadScene("Test Scene");
     }
