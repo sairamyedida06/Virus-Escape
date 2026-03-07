@@ -7,7 +7,10 @@ public class UI_Manager : MonoBehaviour
 {
     public GameObject mainMenuScreen;
     public GameObject hud;
-     public GameObject GameOverScreen;
+    public GameObject GameOverScreen;
+    public GameObject MobileControls;
+
+
 
     public Health_Display Health_Display;
 
@@ -26,6 +29,7 @@ public class UI_Manager : MonoBehaviour
         GameOverScreen.SetActive(false);
         mainMenuScreen.SetActive(false);
         hud.SetActive(false);
+        MobileControls.SetActive(false);
     }
     void Start()
     {
@@ -51,6 +55,7 @@ public class UI_Manager : MonoBehaviour
 
         hud.SetActive(false);
         GameOverScreen.SetActive(false );
+        MobileControls.SetActive(false);
 
     }
 
@@ -59,11 +64,13 @@ public class UI_Manager : MonoBehaviour
         hud.SetActive(true);
         mainMenuScreen.SetActive(false);
         GameOverScreen.SetActive(false);
+        MobileControls.SetActive(true);
     }
 
     public void ShowGameOverScreen()
     {
         GameOverScreen.SetActive(true);
+        MobileControls.SetActive(false);
 
         ClearCameraTarget();
     }
