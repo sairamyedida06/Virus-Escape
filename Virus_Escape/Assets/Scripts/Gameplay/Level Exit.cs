@@ -9,7 +9,7 @@ public class LevelExit : MonoBehaviour
 
     [SerializeField] string targetScene;
 
-    [SerializeField] bool open = false;
+    
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class LevelExit : MonoBehaviour
     }
     public void OpenGate()
     {
-        open = true;
+        
 
         gateCollider.enabled = true;
 
