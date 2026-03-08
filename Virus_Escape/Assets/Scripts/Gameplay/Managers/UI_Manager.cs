@@ -6,11 +6,15 @@ using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
     public GameObject mainMenuScreen;
+    public GameObject settingsPanel;
+    public GameObject pauseMenuPanel;
     public GameObject hud;
     public GameObject GameOverScreen;
     public GameObject MobileControls;
 
-
+    [SerializeField] Image musicIcon;
+    [SerializeField] Sprite musicOnSprite;
+    [SerializeField] Sprite musicOffSprite;
 
     public Health_Display Health_Display;
 
@@ -22,7 +26,6 @@ public class UI_Manager : MonoBehaviour
 
     public static UI_Manager Instance { get; private set; }
 
-
     private void Awake()
     {
         Instance = this;
@@ -30,40 +33,20 @@ public class UI_Manager : MonoBehaviour
         mainMenuScreen.SetActive(false);
         hud.SetActive(false);
         MobileControls.SetActive(false);
-    }
-    void Start()
-    {
-        
-
-    }
-
-    public void StartGame()
-    {
-        mainMenuScreen.SetActive(false);
-  
-
-        SceneManager.LoadScene("Level_1");
-    }
-
-    public void QuitButton()
-    {
-        Application.Quit();
-    }
-
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        settingsPanel.SetActive(false);
+        pauseMenuPanel.SetActive(false);
     }
 
     public void ShowMainMenu()
     {
         mainMenuScreen.SetActive(true);
-
         hud.SetActive(false);
-        GameOverScreen.SetActive(false );
+        GameOverScreen.SetActive(false);
         MobileControls.SetActive(false);
+        pauseMenuPanel.SetActive(false);
+        staminaBar.enabled = false;
 
+        UpdateMusicIcon();
     }
 
     public void ShowHud()
@@ -72,28 +55,86 @@ public class UI_Manager : MonoBehaviour
         mainMenuScreen.SetActive(false);
         GameOverScreen.SetActive(false);
         MobileControls.SetActive(true);
+        staminaBar.enabled = true;
     }
 
     public void ShowGameOverScreen()
     {
         GameOverScreen.SetActive(true);
         MobileControls.SetActive(false);
+        GameManager.Instance.ClearCameraTarget();
+    }
 
-        ClearCameraTarget();
+    public void StartGameButton()
+    {
+        mainMenuScreen.SetActive(false);
+        GameManager.Instance.StartGame();
+    }
+
+    public void QuitButton()
+    {
+        GameManager.Instance.QuitGame();
+    }
+
+    public void SettingsButton()
+    {
+        settingsPanel.SetActive(true);
+        mainMenuScreen.SetActive(false);
+    }
+    public void MusicToggleButton()
+    {
+        AudioManager.Instance.ToggleMusic();
+        UpdateMusicIcon();
+    }
+    public void UpdateMusicIcon()
+    {
+        if (AudioManager.Instance.IsMusicPlaying())
+            musicIcon.sprite = musicOnSprite;
+        else
+            musicIcon.sprite = musicOffSprite;
+    }
+
+    public void SettingsBackButton()
+    {
+        mainMenuScreen.SetActive(true);
+        settingsPanel.SetActive(false);
+    }
+
+    public void PauseButton()
+    {
+        pauseMenuPanel.SetActive(true);
+        MobileControls.SetActive(false);
+        GameManager.Instance.PauseGame();
+    }
+
+    public void ResumeButton()
+    {
+        pauseMenuPanel.SetActive(false);
+        MobileControls.SetActive(true);
+        GameManager.Instance.ResumeGame();
+    }
+
+    public void RestartButton()
+    {
+        pauseMenuPanel.SetActive(false);
+        GameManager.Instance.Restart();
+    }
+
+    public void MainMenuButton()
+    {
+        ShowMainMenu();
+        GameManager.Instance.LoadMainMenu();
+    }
+
+    public void PauseMenuBackButton()
+    {
+        pauseMenuPanel.SetActive(false);
+        MobileControls.SetActive(true);
+        GameManager.Instance.ResumeGame();
     }
 
     public void SetStaminaFillAmount(float value)
     {
-       Staminabar.SetValue(value);
+        Staminabar.SetValue(value);
     }
-
-    public void ClearCameraTarget()
-    {
-        var cam = (CinemachineCamera)CinemachineBrain.GetActiveBrain(0).ActiveVirtualCamera;
-
-        cam.Target.TrackingTarget = null;
-
-    }
-
-
 }

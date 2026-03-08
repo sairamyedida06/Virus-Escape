@@ -3,6 +3,8 @@
 public class SceneInitializer : MonoBehaviour
 {
     [SerializeField] UI_Manager uiManager;
+    [SerializeField] GameManager gameManager;
+    [SerializeField] AudioManager AudioManager;
 
     private void Awake()
     {
@@ -13,6 +15,20 @@ public class SceneInitializer : MonoBehaviour
             DontDestroyOnLoad(UI_Manager.Instance);
 
         }
+        if(GameManager.Instance == null)
+        {
+            Instantiate(gameManager);
+
+            DontDestroyOnLoad(GameManager.Instance);
+        }
+
+        if (AudioManager.Instance == null)
+        {
+            Instantiate(AudioManager);
+
+            DontDestroyOnLoad(AudioManager.Instance);
+        }
+
     }
     public enum Scenetype
     {
