@@ -42,4 +42,5 @@ public class Player_Animation : MonoBehaviour
         player.InputHandling = false;
         animator.SetBool("Alive",false);
     }
+
 }

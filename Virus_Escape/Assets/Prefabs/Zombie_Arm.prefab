@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.46712103
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.12999979
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.66021466
+      value: 28.89
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -695,12 +695,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   player: {fileID: 0}
   animator: {fileID: 484718319595858170}
-  detectionRadius: 15
+  detectionRadius: 10.55
   attackRange: 2
-  patrolRadius: 20
+  patrolRadius: 10.5
   attackCooldown: 2
   patrolIdleTime: 3
   rotationSpeed: 7
   attackDuration: 1
   attackDamage: 1
-  maxChaseDistance: 25
+  maxChaseDistance: 10.6

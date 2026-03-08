@@ -44,6 +44,13 @@ public class UI_Manager : MonoBehaviour
 
         SceneManager.LoadScene("Level_1");
     }
+
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
+
+
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

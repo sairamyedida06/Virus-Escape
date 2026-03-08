@@ -27,6 +27,7 @@ public class Spike_Trap : MonoBehaviour
     [SerializeField] private AudioClip spikeClip;
 
 
+
     float timer;
     
 
@@ -71,13 +72,14 @@ public class Spike_Trap : MonoBehaviour
         if(state == TransitionState.TransistionToActive)
         {
             localSource.PlayOneShot(spikeClip);
-           
+            
         }
     }
 
     void Update()
     {
         UpdateFSM();
+
     }
 
     void UpdateFSM()
@@ -163,6 +165,7 @@ public class Spike_Trap : MonoBehaviour
         }
             
     }
+    
 
     public void ApplyDamage()
     {

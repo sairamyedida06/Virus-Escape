@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +21,7 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Chase Settings")]
     public float maxChaseDistance = 25f;
+
     private Vector3 spawnPosition;
 
     private NavMeshAgent agent;
@@ -43,11 +43,15 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        if (animator == null) animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+           
 
+        // Lock spawn position once at start — everything is anchored here
         spawnPosition = transform.position;
 
-        // NEW: get player health reference
         playerHealth = player.GetComponent<Player_Health>();
 
         SetNewPatrolPoint();
@@ -56,10 +60,11 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        // NEW: stop enemy if player is dead
+        // Stop enemy if player is dead
         if (playerHealth != null && !playerHealth.Alive)
         {
             CancelAttack();
+            agent.ResetPath();
             currentState = State.Patrol;
             return;
         }
@@ -67,39 +72,70 @@ public class EnemyAI : MonoBehaviour
         cooldownTimer -= Time.deltaTime;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceFromSpawn = Vector3.Distance(transform.position, spawnPosition);
 
+        // Detection is measured from SPAWN so the enemy can't "discover" the player
+        // while roaming far from home
+        float playerDistanceFromSpawn = Vector3.Distance(spawnPosition, player.position);
+
+        bool playerInDetectionRange = playerDistanceFromSpawn <= detectionRadius;
+        bool playerInChaseRange = distanceFromSpawn < maxChaseDistance;
+
+        // If attacking but player walked out of attack range, cancel
         if (isAttacking && distanceToPlayer > attackRange)
         {
             CancelAttack();
             currentState = State.Chase;
         }
 
+        // Count down attack duration
         if (isAttacking)
         {
             attackTimer -= Time.deltaTime;
+
             if (attackTimer <= 0f)
-            {
                 EndAttack();
-            }
         }
 
+        // Only re-evaluate state when not mid-attack
         if (!isAttacking)
         {
-            float distanceFromSpawn = Vector3.Distance(transform.position, spawnPosition);
-
-            if (distanceToPlayer <= attackRange && cooldownTimer <= 0f)
+            if (distanceToPlayer <= attackRange && cooldownTimer <= 0f && playerInChaseRange)
+            {
                 currentState = State.Attack;
-            else if (distanceToPlayer <= detectionRadius && distanceFromSpawn < maxChaseDistance)
+            }
+            else if (playerInDetectionRange && playerInChaseRange)
+            {
+                // Player is within the spawn-anchored detection bubble AND enemy hasn't
+                // wandered too far — chase is valid
                 currentState = State.Chase;
+            }
             else
+            {
+                // Player is out of range — cleanly exit attack/chase and return to patrol
+                if (currentState == State.Attack || currentState == State.Chase)
+                {
+                    animator.ResetTrigger("Attack");
+                    agent.ResetPath();
+                }
+
                 currentState = State.Patrol;
+            }
         }
 
         switch (currentState)
         {
-            case State.Patrol: Patrol(); break;
-            case State.Chase: ChasePlayer(); break;
-            case State.Attack: Attack(); break;
+            case State.Patrol:
+                Patrol();
+                break;
+
+            case State.Chase:
+                ChasePlayer();
+                break;
+
+            case State.Attack:
+                Attack();
+                break;
         }
 
         animator.SetBool("isWalking", agent.velocity.magnitude > 0.1f && !isAttacking);
@@ -113,11 +149,13 @@ public class EnemyAI : MonoBehaviour
         if (isIdle)
         {
             idleTimer += Time.deltaTime;
+
             if (idleTimer >= patrolIdleTime)
             {
                 SetNewPatrolPoint();
                 idleTimer = 0f;
             }
+
             return;
         }
 
@@ -131,6 +169,7 @@ public class EnemyAI : MonoBehaviour
 
     void SetNewPatrolPoint()
     {
+        // Always sample from spawnPosition so patrol never drifts
         Vector3 randomDirection = Random.insideUnitSphere * patrolRadius + spawnPosition;
 
         if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, patrolRadius, NavMesh.AllAreas))
@@ -140,6 +179,7 @@ public class EnemyAI : MonoBehaviour
             isPatrolling = true;
             isIdle = false;
         }
+        
     }
 
     void ChasePlayer()
@@ -148,25 +188,34 @@ public class EnemyAI : MonoBehaviour
         isPatrolling = false;
 
         if (agent.isOnNavMesh && player != null)
+        {
             agent.SetDestination(player.position);
+        }
+            
     }
 
     void Attack()
     {
-        if (isAttacking) return;
+        if (isAttacking)
+            return;
 
         float distance = Vector3.Distance(transform.position, player.position);
-        if (distance > attackRange)
+        float distanceFromSpawn = Vector3.Distance(transform.position, spawnPosition);
+
+        // Double-validate before committing to attack
+        if (distance > attackRange || distanceFromSpawn >= maxChaseDistance)
         {
-            currentState = State.Chase;
+            currentState = distanceFromSpawn >= maxChaseDistance ? State.Patrol : State.Chase;
             return;
         }
 
         isAttacking = true;
         cooldownTimer = attackCooldown;
         attackTimer = attackDuration;
+
         agent.ResetPath();
 
+        // Face the player on Y-axis only
         Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
@@ -185,9 +234,7 @@ public class EnemyAI : MonoBehaviour
             IDamageable damageable = player.GetComponent<IDamageable>();
 
             if (damageable != null)
-            {
                 damageable.Damage(attackDamage);
-            }
         }
     }
 
@@ -199,8 +246,6 @@ public class EnemyAI : MonoBehaviour
 
     public void CancelAttack()
     {
-        if (!isAttacking) return;
-
         isAttacking = false;
         attackTimer = 0f;
         cooldownTimer = attackCooldown;
@@ -219,6 +264,7 @@ public class EnemyAI : MonoBehaviour
         if (agent.velocity.sqrMagnitude > 0.1f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(agent.velocity.normalized);
+
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 targetRotation,
@@ -229,10 +275,21 @@ public class EnemyAI : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(spawnPosition, maxChaseDistance);
+        // During edit mode spawnPosition isn't set yet, so fall back to transform.position
+        Vector3 origin = Application.isPlaying ? spawnPosition : transform.position;
 
-        if (player != null)
-            Gizmos.DrawLine(transform.position, player.position);
+        // Patrol radius — fixed at spawn
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(origin, patrolRadius);
+
+        // Detection radius — fixed at spawn so it matches the actual detection logic
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(origin, detectionRadius);
+
+        // Max chase distance — fixed at spawn
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(origin, maxChaseDistance);
+
+     
     }
 }

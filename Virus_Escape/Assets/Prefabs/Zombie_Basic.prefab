@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.581132
+      value: 23.81
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.12999967
+      value: 0.00000016964032
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.448
+      value: 5.93079
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CrawlerZombie
   player: {fileID: 0}
   moveSpeed: 1
-  detectionRadius: 12
+  detectionRadius: 2.4
   rotationSpeed: 8
   contactDamage: 1
 --- !u!65 &6653739843111378714
@@ -241,7 +241,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 38
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
