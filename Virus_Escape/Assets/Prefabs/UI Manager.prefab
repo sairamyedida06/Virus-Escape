@@ -1854,7 +1854,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 879813468540292421}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: Restart
+        m_MethodName: RestartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

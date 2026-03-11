@@ -45,6 +45,7 @@ public class UI_Manager : MonoBehaviour
         MobileControls.SetActive(false);
         pauseMenuPanel.SetActive(false);
         staminaBar.enabled = false;
+        Staminabar.enabled = false;
 
         UpdateMusicIcon();
     }
