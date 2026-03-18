@@ -21,16 +21,28 @@ PrefabInstance:
       value: 0.0000014895234
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.79
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.79
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.79
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.7159543
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 28.88194
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.89
+      value: -8.402739
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -59,6 +71,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c192389a512686c46b7be00109d545e2, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8497750235617784815, guid: c192389a512686c46b7be00109d545e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -693,7 +709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5459dc171e508d4439fd81aadfd1ef2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  player: {fileID: 0}
+  player: {fileID: 743482657609905663, guid: 148d39a8e0ac5e54581a35bc501123ab, type: 3}
   animator: {fileID: 484718319595858170}
   detectionRadius: 10.55
   attackRange: 2

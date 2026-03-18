@@ -98,15 +98,7 @@ public class Player : MonoBehaviour
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        if(context.performed)
-        {
-            sprintInput = true;
-
-        }
-        else if(context.canceled)
-        {
-            sprintInput= false;
-        }
+        sprintInput = context.ReadValue<float>() > 0;
     }
 
 
@@ -116,9 +108,9 @@ public class Player : MonoBehaviour
     void UpdateMovement()
     {
 
-        Vector3 moveInput3D = new Vector3(moveInput.x, 0f, moveInput.y);
+        Vector3 relativeMoveDir = GetCameraRelativeMoveDirection();
 
-        Vector3 motion = moveInput3D * MoveSpeed * Time.deltaTime;
+        Vector3 motion = relativeMoveDir * MoveSpeed * Time.deltaTime;
 
         Gravity();
  
@@ -128,11 +120,28 @@ public class Player : MonoBehaviour
 
         characterController.Move(motion);
 
-        UpdatePlayerRotation(moveInput3D);
+        UpdatePlayerRotation(relativeMoveDir);
 
         OnLand();
 
     }
+
+    Vector3 GetCameraRelativeMoveDirection()
+    {
+        Vector3 moveInput3D = new Vector3(moveInput.x, 0f, moveInput.y);
+
+        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camRight = Camera.main.transform.right;
+
+        camForward.y = 0f;
+        camRight.y = 0f;
+        camForward.Normalize();
+        camRight.Normalize();
+
+        return (camForward * moveInput3D.z + camRight * moveInput3D.x);
+    }
+
+
 
     public void UpdateJump()
     {

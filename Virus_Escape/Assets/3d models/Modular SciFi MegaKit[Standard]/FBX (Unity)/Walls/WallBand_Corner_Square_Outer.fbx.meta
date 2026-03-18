@@ -3,7 +3,22 @@ guid: d160067cc7e23f847b95f3a9f61048e1
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_Trim_01
+    second: {fileID: 2100000, guid: aade827a479e31a4f8c78f33dc03741c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_Trim_02
+    second: {fileID: 2100000, guid: a23fd0a8f9d1bf54893b10e3088b6971, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Decal_White
+    second: {fileID: 2100000, guid: 71874b9ec5c56a94caf7212140984edc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

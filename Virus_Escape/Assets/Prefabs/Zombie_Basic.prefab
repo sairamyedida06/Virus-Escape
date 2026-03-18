@@ -22,31 +22,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.81
+      value: -18.969225
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000016964032
+      value: 28.881939
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.93079
+      value: -8.036384
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.38444993
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.9231459
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -134.781
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55b0fa69d1f9a4849b0141b8e904615c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -133,9 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc42ffd1e9154340b3ca3571423088a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrawlerZombie
-  player: {fileID: 0}
+  player: {fileID: 743482657609905663, guid: 148d39a8e0ac5e54581a35bc501123ab, type: 3}
   moveSpeed: 1
-  detectionRadius: 2.4
+  detectionRadius: 1.78
   rotationSpeed: 8
   contactDamage: 1
 --- !u!65 &6653739843111378714

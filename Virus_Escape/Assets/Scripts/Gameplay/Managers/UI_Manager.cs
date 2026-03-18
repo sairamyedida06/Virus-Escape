@@ -11,6 +11,7 @@ public class UI_Manager : MonoBehaviour
     public GameObject hud;
     public GameObject GameOverScreen;
     public GameObject MobileControls;
+    public GameObject staminaBarScreen;
 
     [SerializeField] Image musicIcon;
     [SerializeField] Sprite musicOnSprite;
@@ -35,6 +36,9 @@ public class UI_Manager : MonoBehaviour
         MobileControls.SetActive(false);
         settingsPanel.SetActive(false);
         pauseMenuPanel.SetActive(false);
+        staminaBarScreen.SetActive(false);
+
+
     }
 
     public void ShowMainMenu()
@@ -44,8 +48,10 @@ public class UI_Manager : MonoBehaviour
         GameOverScreen.SetActive(false);
         MobileControls.SetActive(false);
         pauseMenuPanel.SetActive(false);
-        staminaBar.enabled = false;
-        Staminabar.enabled = false;
+        staminaBarScreen.SetActive(false);
+
+
+
 
         UpdateMusicIcon();
     }
@@ -56,7 +62,9 @@ public class UI_Manager : MonoBehaviour
         mainMenuScreen.SetActive(false);
         GameOverScreen.SetActive(false);
         MobileControls.SetActive(true);
-        staminaBar.enabled = true;
+        staminaBarScreen.SetActive(true) ;
+
+
     }
 
     public void ShowGameOverScreen()

@@ -10,43 +10,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.9299386
+      value: -44.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13000019
+      value: 7.34
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.6351025
+      value: -12.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9999849
+      value: -0.9999818
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0054977355
+      value: -0.005489864
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.0024871598
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.0002917612
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.63
+      value: 0.629
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 359.715
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 0.032
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       propertyPath: m_Name
@@ -87,6 +87,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5348538298888281605}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5074301546280579796}
   m_SourcePrefab: {fileID: 100100000, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}
 --- !u!1 &79570716662443845 stripped
 GameObject:
@@ -114,7 +117,7 @@ CharacterController:
   m_Height: 1.18
   m_Radius: 0.27
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.36
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.59, z: 0}
@@ -297,13 +300,13 @@ MonoBehaviour:
   jumped:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: JumpAudio
-        m_Mode: 2
+      - m_Target: {fileID: 5074301546280579796}
+        m_TargetAssemblyTypeName: PlayerSFX, Assembly-CSharp
+        m_MethodName: PlayJumpSound
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 604a837b15ff85049b9fef25ccfa54f5, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -311,19 +314,7 @@ MonoBehaviour:
         m_CallState: 2
   Landed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!95 &6502275305806548214
 Animator:
   serializedVersion: 7
@@ -444,6 +435,19 @@ MonoBehaviour:
   - {fileID: 1754068248719836757}
   OnDuration: 0.2
   offDuration: 0.4
+--- !u!114 &5074301546280579796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79570716662443845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e394deef7b1086944b3202580e35e377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSfx
+  jumpSound: {fileID: 8300000, guid: 604a837b15ff85049b9fef25ccfa54f5, type: 3}
 --- !u!1 &1754068248719836757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7670638196022979519, guid: e44c0ee57d8f40b428020679ad421e36, type: 3}

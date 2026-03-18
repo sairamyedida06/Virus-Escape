@@ -4511,6 +4511,7 @@ MonoBehaviour:
   hud: {fileID: 5186047392819591914}
   GameOverScreen: {fileID: 8923768368838070347}
   MobileControls: {fileID: 1088495919983617076}
+  staminaBarScreen: {fileID: 7349589289726474719}
   musicIcon: {fileID: 3103490218789141048}
   musicOnSprite: {fileID: 21300000, guid: c44a1f09f6bf74d4ea66a32066bb7361, type: 3}
   musicOffSprite: {fileID: 21300000, guid: 5c0f013bcbeaef64dbcb70e6cb6f0228, type: 3}
@@ -5686,7 +5687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.OnScreen.OnScreenButton
-  m_ControlPath: <Keyboard>/leftShift
+  m_ControlPath: <Keyboard>/shift
 --- !u!1 &8173945339335764014
 GameObject:
   m_ObjectHideFlags: 0
